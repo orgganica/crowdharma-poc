@@ -9,6 +9,11 @@ var bodyParser = require('body-parser');
 var expressLayouts = require('express-ejs-layouts');
 
 var staticRoutes = require('./routes/index');
+var usersRoutes = require('./routes/users');
+var organizationsRoutes = require('./routes/organizations');
+var tasksRoutes = require('./routes/tasks');
+var transactionsRoutes = require('./routes/transactions');
+var assignmentsRoutes = require('./routes/assignments');
 
 var app = express();
 
@@ -25,6 +30,11 @@ app.use(expressLayouts);
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', staticRoutes);
+app.use('/api/users', usersRoutes);
+app.use('/api/organizations', organizationsRoutes);
+app.use('/api/tasks', tasksRoutes);
+app.use('/api/transactions', transactionsRoutes);
+app.use('/api/assignments', assignmentsRoutes);
 
 
 /// catch 404 and forward to error handler

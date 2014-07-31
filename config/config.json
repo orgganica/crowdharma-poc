@@ -1,0 +1,6 @@
+{
+  "mongodb" : {
+    "name": "crowdharma_db",
+    "server" : "mongodb://localhost:27017/crowdharma_db"
+  }
+}

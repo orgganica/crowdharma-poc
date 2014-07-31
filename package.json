@@ -3,8 +3,13 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
-    "start": "node ./bin/www",
+    "start": "node ./bin/www --config config/config.json",
     "test": "simpleunit ./test"
+  },
+  "config" : {
+    "notFound" : "throw",
+    "defaultConfigFile" : "config/config.json",
+    "commandLineSwitchName" : "config"
   },
   "dependencies": {
     "express": "~4.2.0",
@@ -15,7 +20,8 @@
     "debug": "~0.7.4",
     "ejs": "~0.8.5",
     "express-ejs-layouts": "^1.1.0",
-    "ostore": "0.0.4"
+    "configure":"~0.0.1",
+    "mongoose" : "3.8.8"
   },
   "devDependencies": {
     "simpleunit": "0.0.4",

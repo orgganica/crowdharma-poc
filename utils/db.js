@@ -1,39 +1,16 @@
 'use strict';
 
-var ostore = require('ostore');
+var config   = require('configure'),
+    mongoose = require('mongoose');
 
-var stores = { };
+mongoose.connect(config.mongodb.server);
 
-function getCreateStore(name) {
-    if (stores[name])
-        return stores[name];
-        
-    var store = ostore.createStore();
-    stores[name] = store;
-    return store;
-}
+var db = mongoose.connection;
 
-function createStore(name) {
-    var store = ostore.createStore();
-    stores[name] = store;
-    return store;
-}
+db.on('error', console.error.bind(console, 'connection error:'));
 
-function clear() {
-    for (var n in stores) {
-        var store = stores[n];
-        store.clear();
-    }
-}
+db.once('open', function() {
+  console.log("Connected with %s", config.mongodb.name);
+});
 
-module.exports = {
-
-    store: getCreateStore,
-
-    createStore: createStore,
-    clear: clear
-
-};
-
-
-
+module.exports = mongoose;
