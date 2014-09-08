@@ -6,24 +6,26 @@ var mongoose = require('../utils/db');
 var Schema = mongoose.Schema,
     ObjectId = mongoose.Schema.Types.ObjectId;
 
-var organizationSchema = new Schema({
-    name:  String
+var accountSchema = new Schema({
+    number: { type: Number, index: { unique: true, dropDups: true } },
+    owner_type: String,
+    owner_id: Number
 });
 
-var Organization = mongoose.model('Organization', organizationSchema);
+var Account = mongoose.model('Account', accountSchema);
 
-function getOrganizations(filter, resultsCallback){
+function getAccounts(filter, resultsCallback){
     filter =  filter || {};
 
-    Organization.find(filter, function(err, result){
+    Account.find(filter, function(err, result){
       if (resultsCallback && typeof(resultsCallback === "function")) {
         resultsCallback(err, result);
       }
     });
 }
 
-function getOrganization(_id, resultsCallback){
-    Organization.findById(_id, function(err, result){
+function getAccount(_id, resultsCallback){
+    Account.findById(_id, function(err, result){
       if (resultsCallback && typeof(resultsCallback === "function")) {
         resultsCallback(err, result);
       }
@@ -31,26 +33,26 @@ function getOrganization(_id, resultsCallback){
 }
 
 function create(attrs, resultsCallback){
-    var organization = new Organization(attrs);
+    var account = new Account(attrs);
 
-    organization.save(function(err) {
+    account.save(function(err) {
       if (err) return resultsCallback(err, null);
 
-      getOrganization(organization, resultsCallback);
+      getAccount(account, resultsCallback);
     });
 }
 
 function update(_id, attrs, resultsCallback){
-    Organization.findByIdAndUpdate(_id, attrs, resultsCallback)
+    Account.findByIdAndUpdate(_id, attrs, resultsCallback)
 }
 
 function destroy(_id, resultsCallback){
-    Organization.findByIdAndRemove(_id, resultsCallback)
+    Account.findByIdAndRemove(_id, resultsCallback)
 }
 
 var methods = {
-    getOrganization: getOrganization,
-    getOrganizations: getOrganizations,
+    getAccount: getAccount,
+    getAccounts: getAccounts,
     create: create,
     update: update,
     destroy: destroy

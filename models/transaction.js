@@ -7,10 +7,8 @@ var Schema = mongoose.Schema,
     ObjectId = mongoose.Schema.Types.ObjectId;
 
 var transactionSchema = new Schema({
-    from_type:  String,
-    from_id: Number,
-    to_type:   String,
-    to_id: Number,
+    from_account_id:  Number,
+    to_account_id: Number,
     created_at: { type: Date, default: Date.now },
     amount: Number,
     task_id: Number

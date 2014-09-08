@@ -12,8 +12,7 @@ var userSchema = new Schema({
     last_name:   String,
     email: { type: String, index: { unique: true, dropDups: true } },
     created_at: { type: Date, default: Date.now },
-    gender: String,
-    dharma: Number
+    gender: String
 });
 
 var User = mongoose.model('User', userSchema);
